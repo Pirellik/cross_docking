@@ -16,4 +16,4 @@ if __name__ == "__main__":
     centre = CrossDockingCentre(problem_inst1)
     centre.load_solution(wrap)
     time = centre.simulate()
-    print('UWAGA czas = ', time)
+    print('UWAGA!!! czas = ', time)
