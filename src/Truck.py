@@ -3,9 +3,9 @@ class Truck:
         self.product_list = sorted(zip(range(0, len(product_priorities)), products, product_priorities), key=lambda x: x[2])
         self.product_list = [[x[0], x[1]] for x in self.product_list]
         assert(sum([x[1] for x in self.product_list]))
-        for index, elem in enumerate(self.product_list):
-            if elem[1] == 0:
-                self.product_list.pop(index)
+        self.product_list = list(filter(lambda x: x[1], self.product_list))
+        for elem in self.product_list:
+            assert(elem[1])
 
     def pop_product(self):
         if not self.product_list:

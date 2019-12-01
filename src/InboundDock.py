@@ -15,12 +15,7 @@ class InboundDock:
         return self.operation_finished
 
     def process_unloading_operation(self, time):
-        if time != self.current_job_finish_time:
-            print("TIME = ", time)
-            print("CURRENT JOB FINISH = ", self.current_job_finish_time)
-            if self.truck_list:
-                print(self.truck_list[0].is_empty())
-                print("POZOSTALA LICZBA PROD = ", self.truck_list[0].product_list[0][1])
+        if time != self.current_job_finish_time or self.is_operation_finished():
             return
 
         if self.state == "INITIAL":

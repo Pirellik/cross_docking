@@ -4,11 +4,9 @@ from src.Truck import Truck
 class SolutionWrapper:
     def __init__(self, solution, problem_instance):
         self.inbound_truck_list = self._prepare_truck_lists(solution[0:2 * problem_instance['N']], problem_instance, 'N', 'R', 'a', 'b')
-        print('TERAZ OUTBOUND')
         self.outbound_truck_list = self._prepare_truck_lists(solution[2 * problem_instance['N']:], problem_instance, 'M', 'S', 'c', 'd')
 
     def get_inbound_truck_list(self, dock_index):
-        assert(self.inbound_truck_list[dock_index])
         return self.inbound_truck_list[dock_index]
 
     def get_outbound_truck_list(self, dock_index):
@@ -32,9 +30,5 @@ class SolutionWrapper:
             for truck in trucks_for_inbound_docks[dock_id]:
                 trucks_list[dock_id].append(
                     Truck(problem_instance[num_prod_var][truck[0]], problem_instance[priority_var][truck[0]]))
-        for elem in trucks_list:
-            for elem2 in elem:
-                print(elem2.product_list)
-            print("DUPA")
 
         return trucks_list

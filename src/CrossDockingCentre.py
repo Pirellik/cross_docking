@@ -29,26 +29,21 @@ class CrossDockingCentre:
         time = 0
         docks_finished = 0
 
-        while self.inbound_docks:#docks_finished < 5:#self.num_docks:
-            print('==========================================================================')
-            for index, dock in enumerate(self.inbound_docks):
+        while sum([dock.is_operation_finished() for dock in self.inbound_docks]) < len(self.inbound_docks)\
+                or sum([dock.is_operation_finished() for dock in self.outbound_docks]) < len(self.outbound_docks):
+            for dock in self.inbound_docks:
                 if dock.is_operation_finished():
                     docks_finished += 1
-                    self.inbound_docks.pop(index)
                 else:
                     print(dock.state)
                     dock.process_unloading_operation(time)
-            # for index, dock in enumerate(self.outbound_docks):
-            #     if dock.are_operations_finished():
-            #         docks_finished += 1
-            #         self.outbound_docks.pop(index)
-            #     else:
-            #         dock.process_loading_operation(time)
+            for dock in self.outbound_docks:
+                if dock.is_operation_finished():
+                    docks_finished += 1
+                else:
+                    dock.process_loading_operation(time)
 
             time += self.time_step
-            # print("iteracja kolejna, wartosc docks_finished = ", docks_finished)
-            print("DLUGOSC INBOUND = ", len(self.inbound_docks))
-            print("DLUGOSC OUTBOUND = ", len(self.outbound_docks))
 
         return time - self.time_step
 

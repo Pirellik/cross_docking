@@ -12,11 +12,11 @@ class OutboundDock:
     def load_truck_list(self, truck_list):
         self.truck_list = truck_list
 
-    def are_operations_finished(self):
+    def is_operation_finished(self):
         return self.operations_finished
 
     def process_loading_operation(self, time):
-        if time != self.current_job_finish_time:
+        if time != self.current_job_finish_time or self.is_operation_finished():
             return
 
         if self.state == "INITIAL":
