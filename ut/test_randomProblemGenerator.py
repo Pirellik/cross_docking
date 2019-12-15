@@ -34,8 +34,8 @@ class TestRandomProblemGenerator(TestCase):
         products_nums = random_gen._get_products_nums(random_gen.get_problem_instance())
         random_gen._fill_trucks(random_gen.get_problem_instance(), products_nums)
         problem_instance = random_gen.get_problem_instance()
-        for inbound_product_nums, outbound_product_nums, prod_nums in zip(problem_instance['b'],
-                                                                          problem_instance['d'],
+        for inbound_product_nums, outbound_product_nums, prod_nums in zip([*zip(*problem_instance['b'])],
+                                                                          [*zip(*problem_instance['d'])],
                                                                           products_nums):
             self.assertEqual(sum(inbound_product_nums), sum(outbound_product_nums))
 
@@ -45,8 +45,8 @@ class TestRandomProblemGenerator(TestCase):
         random_gen._fill_truck_type('b', 'N', random_gen.get_problem_instance(), products_nums)
         random_gen._fill_truck_type('d', 'M', random_gen.get_problem_instance(), products_nums)
         problem_instance = random_gen.get_problem_instance()
-        for inbound_product_nums, outbound_product_nums, prod_nums in zip(problem_instance['b'],
-                                                                          problem_instance['d'],
+        for inbound_product_nums, outbound_product_nums, prod_nums in zip([*zip(*problem_instance['b'])],
+                                                                          [*zip(*problem_instance['d'])],
                                                                           products_nums):
             self.assertEqual(sum(outbound_product_nums), prod_nums)
             self.assertEqual(sum(inbound_product_nums), prod_nums)

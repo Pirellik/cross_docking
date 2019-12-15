@@ -35,16 +35,18 @@ class CrossDockingCentre:
                 if dock.is_operation_finished():
                     docks_finished += 1
                 else:
-                    print(dock.state)
                     dock.process_unloading_operation(time)
             for dock in self.outbound_docks:
                 if dock.is_operation_finished():
                     docks_finished += 1
                 else:
+                    print("INBOUND PROCESSING")
                     dock.process_loading_operation(time)
 
             time += self.time_step
-
+            print("TEMPORARY STORAGE = ", self.temporary_storage.products)
+            print("inbound_docks", sum([dock.is_operation_finished() for dock in self.inbound_docks]))
+            print("outbound_docks", sum([dock.is_operation_finished() for dock in self.outbound_docks]))
         return time - self.time_step
 
 

@@ -15,6 +15,9 @@ class InboundDock:
         return self.operation_finished
 
     def process_unloading_operation(self, time):
+        if time > self.current_job_finish_time:
+            print("ERROR INBOUND")
+
         if time != self.current_job_finish_time or self.is_operation_finished():
             return
 
