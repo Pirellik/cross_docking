@@ -1,5 +1,6 @@
 from src.Particle import Particle
 import numpy as np
+from tqdm import tqdm
 
 
 class ParticleSwarmOptimizer:
@@ -18,7 +19,8 @@ class ParticleSwarmOptimizer:
         self.max_iter = max_iter
 
     def optimize(self):
-        for _ in range(0, self.max_iter):
+        print("CURRENT BEST = ", self.global_best_cost)
+        for _ in tqdm(range(0, self.max_iter)):
             for particle in self.particles:
                 if particle.update(self.global_best_position, self.inertia, self.c1, self.c2):
                     self.update_global_best(particle)
