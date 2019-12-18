@@ -1,5 +1,5 @@
 import numpy as np
-from src.Truck import Truck
+from Truck import Truck
 
 
 class SolutionWrapper:

@@ -1,5 +1,5 @@
 from unittest import TestCase
-from src.RandomProblemGenerator import RandomProblemGenerator
+from RandomProblemGenerator import RandomProblemGenerator
 import json
 import hashlib
 from copy import copy

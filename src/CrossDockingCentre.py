@@ -1,6 +1,6 @@
-from src.TemporaryStorage import TemporaryStorage
-from src.InboundDock import InboundDock
-from src.OutboundDock import OutboundDock
+from TemporaryStorage import TemporaryStorage
+from InboundDock import InboundDock
+from OutboundDock import OutboundDock
 
 
 class CrossDockingCentre:

@@ -1,5 +1,5 @@
 from unittest import TestCase
-from src.Truck import Truck
+from Truck import Truck
 
 
 class TestTruck(TestCase):
