@@ -2,6 +2,7 @@ from Particle import Particle
 import numpy as np
 from tqdm import tqdm
 from multiprocessing import Pool
+import multiprocessing
 
 
 def update_particle(particle):
@@ -24,7 +25,8 @@ class ParticleSwarmOptimizer:
         self.max_iter = max_iter
 
     def optimize(self):
-        pool = Pool(8)
+        print('INITIAL SOLUTION COST = ', self.global_best_cost)
+        pool = Pool(multiprocessing.cpu_count())
         pbar = tqdm(total = self.max_iter)
         pbar.set_description(f'CURRENT BEST = {self.global_best_cost}')
         for _ in range(0, self.max_iter):

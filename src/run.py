@@ -18,4 +18,4 @@ def cost_function(x):
 
 if __name__ == "__main__":
     opt = ParticleSwarmOptimizer(106, cost_function)
-    print(opt.optimize())
+    opt.optimize()
