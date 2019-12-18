@@ -40,20 +40,7 @@ class CrossDockingCentre:
                 if dock.is_operation_finished():
                     docks_finished += 1
                 else:
-                    # print("INBOUND PROCESSING")
                     dock.process_loading_operation(time)
 
             time += self.time_step
-            # print("TEMPORARY STORAGE = ", self.temporary_storage.products)
-            # print("inbound_docks", sum([dock.is_operation_finished() for dock in self.inbound_docks]))
-            # print("outbound_docks", sum([dock.is_operation_finished() for dock in self.outbound_docks]))
         return time - self.time_step
-
-
-# random_gen = RandomProblemGenerator(5, 6, 13, 14, 10, 2, 2, 1, 1, 70, 150)
-# random_gen.randomize()
-# problem_inst1 = random_gen.get_problem_instance()
-# cross = CrossDockingCentre(problem_inst1)
-#
-# for elem in cross.inbound_docks:
-#     print(elem.truck_list)

@@ -1,11 +1,7 @@
-import numpy as np
-
 from src.RandomProblemGenerator import RandomProblemGenerator
 from src.SolutionWrapper import SolutionWrapper
 from src.CrossDockingCentre import CrossDockingCentre
 from src.ParticleSwarmOptimizer import ParticleSwarmOptimizer
-from src.Particle import Particle
-import random
 
 
 if __name__ == "__main__":

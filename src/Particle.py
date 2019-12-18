@@ -19,12 +19,10 @@ class Particle:
         return False
 
     def update(self, global_best_pos, inertia, c1, c2):
-        # print(self.position)
         self.velocity = inertia * self.velocity + \
                         c1 * random.random() * self.best_position - self.position + \
                         c2 * random.random() * global_best_pos - self.position
 
         self.position = self.position + self.velocity
-        # print("DUPA")
         self.cost = self.cost_function(self.position)
         return self.update_personal_best()

@@ -29,9 +29,3 @@ class Truck:
     def is_empty(self):
         return not sum([x[1] for x in self.product_list])
 
-
-# truck = Truck([5,7, 0, 3], [3,2, 4, 1])
-# while not truck.is_empty():
-#     print(truck.get_next_product_id())
-#     truck.pop_product()
-#     print(truck.product_list)

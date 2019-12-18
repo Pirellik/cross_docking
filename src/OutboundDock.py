@@ -16,12 +16,6 @@ class OutboundDock:
         return self.operations_finished
 
     def process_loading_operation(self, time):
-        # print("TIME = ", time)
-        # print("FINISH TIME = ", self.current_job_finish_time)
-        # print("STATE = ", self.state)
-        # if self.truck_list:
-        #     print("PRODUCT ID = ", self.truck_list[0].get_next_product_id())
-
         if time != self.current_job_finish_time or self.is_operation_finished():
             return
 
