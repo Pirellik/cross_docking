@@ -3,7 +3,7 @@ from SolutionWrapper import SolutionWrapper
 from CrossDockingCentre import CrossDockingCentre
 from ParticleSwarmOptimizer import ParticleSwarmOptimizer
 import json, os
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 import numpy as np
 
 
@@ -43,6 +43,8 @@ class PsoBestCostsDumper:
             self.costs["costs"].append(pso.global_best_cost)
         else:
             dir_path = __file__.replace(__file__.split('/')[-1], '').replace(__file__.split('/')[-2] + '/', '') + 'results/'
+            if not os.path.exists(dir_path):
+                os.mkdir(dir_path)
             with open(dir_path + 'pso_best_costs.json', 'w') as outfile:
                 json.dump(self.costs, outfile)
         self.iter += 1
@@ -63,6 +65,8 @@ class PsoParticlesDumper:
             self.best_particles["med_costs"].append(float(np.median(particles_costs)))
         else:
             dir_path = __file__.replace(__file__.split('/')[-1], '').replace(__file__.split('/')[-2] + '/', '') + 'results/'
+            if not os.path.exists(dir_path):
+                os.mkdir(dir_path)
             with open(dir_path + 'best_particles.json', 'w') as outfile:
                 json.dump(self.best_particles, outfile)
         self.iter += 1
@@ -72,6 +76,8 @@ def best_solution_saver(pso, last_iter):
     if last_iter:
         solution = {'solution': list(pso.global_best_position), 'cost': pso.global_best_cost}
         dir_path = __file__.replace(__file__.split('/')[-1], '').replace(__file__.split('/')[-2] + '/', '') + 'results/'
+        if not os.path.exists(dir_path):
+            os.mkdir(dir_path)
         with open(dir_path + 'best_solution.json', 'w') as outfile:
             json.dump(solution, outfile)
 

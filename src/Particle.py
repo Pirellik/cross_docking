@@ -3,7 +3,7 @@ import numpy as np
 
 
 class Particle:
-    def __init__(self, span_size, cost_function, inertia, c1, c2):
+    def __init__(self, span_size, cost_function, inertia, c1, c2, min_val, max_val):
         self.velocity = np.array([0] * span_size)
         self.position = np.array([random.random() for _ in range(0, span_size)])
         self.cost_function = cost_function
@@ -15,6 +15,8 @@ class Particle:
         self.c2 = c2
         self.improved = False
         self.global_best_pos = self.position
+        self.min_val = min_val
+        self.max_val = max_val
 
     def update_personal_best(self):
         if self.cost < self.best_cost:
@@ -31,7 +33,7 @@ class Particle:
                         self.c1 * random.random() * self.best_position - self.position + \
                         self.c2 * random.random() * self.global_best_pos - self.position
 
-        self.position = self.position + self.velocity
+        self.position = np.clip(self.position + self.velocity, a_min=self.min_val, a_max=self.max_val)
         self.cost = self.cost_function(self.position)
         self.improved = self.update_personal_best()
         return self

@@ -10,12 +10,22 @@ def update_particle(particle):
 
 
 class ParticleSwarmOptimizer:
-    def __init__(self, span_size, cost_function, population_size=20, inertia=1, c1=1.3, c2=1.3, max_iter=1000, **kwargs):
+    def __init__(self, span_size,
+                 cost_function,
+                 min_val=0,
+                 max_val=0.99999,
+                 population_size=16,
+                 inertia=1,
+                 c1=1.3,
+                 c2=1.3,
+                 max_iter=1000,
+                 **kwargs):
+
         self.global_best_cost = 2 ** 64
         self.global_best_position = np.array([0] * span_size)
         self.particles = []
         for _ in range(0, population_size):
-            self.particles.append(Particle(span_size, cost_function, inertia, c1, c2))
+            self.particles.append(Particle(span_size, cost_function, inertia, c1, c2, min_val, max_val))
             if self.particles[-1].best_cost < self.global_best_cost:
                 self.global_best_cost = self.particles[-1].best_cost
                 self.global_best_position = self.particles[-1].best_position
