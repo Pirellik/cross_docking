@@ -62,6 +62,17 @@ cmake-build-*/
 # File-based project format
 *.iws
 
+*.pycharm
+
+.idea/
+
+src/__pycache__/*.pyc
+
+venv/
+
+results/
+
+
 # IntelliJ
 out/
 
