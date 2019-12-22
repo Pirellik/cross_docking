@@ -1,6 +1,4 @@
 import numpy as np
-from tqdm import tqdm
-from run import CostFcnWrapper
 
 
 class SimulatedAnnealingOptimizer:
@@ -12,8 +10,8 @@ class SimulatedAnnealingOptimizer:
     def optimize(self, cost_function, initial_solution):
         state = initial_solution
         cost = cost_function(state)
-        print("INITIAL COST = ", cost)
-        for iter_num in tqdm(range(self.max_iter)):
+        # print("INITIAL COST = ", cost)
+        for iter_num in range(self.max_iter):
             fraction = iter_num / float(self.max_iter)
             T = self.temperature(fraction)
             new_state = self.random_neighbour(state, fraction)
@@ -39,8 +37,8 @@ class SimulatedAnnealingOptimizer:
     def temperature(fraction):
         return max(0.01, min(1, 1 - fraction))
 
-
-if __name__ == "__main__":
-    cost_fcn_wrapper = CostFcnWrapper()
-    opt = SimulatedAnnealingOptimizer(20000)
-    print(opt.optimize(cost_fcn_wrapper.cost_function, np.array([np.random.random() for _ in range(106)])))
+#
+# if __name__ == "__main__":
+#     cost_fcn_wrapper = CostFcnWrapper()
+#     opt = SimulatedAnnealingOptimizer(20000)
+#     print(opt.optimize(cost_fcn_wrapper.cost_function, np.array([np.random.random() for _ in range(106)])))

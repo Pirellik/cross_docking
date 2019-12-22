@@ -2,8 +2,9 @@ from RandomProblemGenerator import RandomProblemGenerator
 from SolutionWrapper import SolutionWrapper
 from CrossDockingCentre import CrossDockingCentre
 from ParticleSwarmOptimizer import ParticleSwarmOptimizer
+from SimulatedAnnealingOptimizer import SimulatedAnnealingOptimizer
 import json, os
-# import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 import numpy as np
 
 
@@ -86,9 +87,15 @@ if __name__ == "__main__":
     cost_fcn_wrapper = CostFcnWrapper()
     best_sol_dumper = PsoBestCostsDumper()
     particles_dumper = PsoParticlesDumper()
-    opt = ParticleSwarmOptimizer(106, cost_fcn_wrapper.cost_function, callbacks=[best_sol_dumper.dump,
-                                                                                 particles_dumper.dump,
-                                                                                 best_solution_saver])
+    local_opt = SimulatedAnnealingOptimizer(50)
+    opt = ParticleSwarmOptimizer(106,
+                                 cost_fcn_wrapper.cost_function,
+                                 max_iter=100,
+                                 population_size=16,
+                                 local_search_alg=local_opt.optimize,
+                                 callbacks=[best_sol_dumper.dump,
+                                            particles_dumper.dump,
+                                            best_solution_saver])
     opt.optimize()
     # path = __file__.replace(__file__.split('/')[-1], '').replace(__file__.split('/')[-2] + '/', '') + 'results/'
     # # with open(path + 'best_particles.json', 'r') as infile:

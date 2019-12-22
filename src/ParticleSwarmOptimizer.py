@@ -19,13 +19,14 @@ class ParticleSwarmOptimizer:
                  c1=1.3,
                  c2=1.3,
                  max_iter=1000,
+                 local_search_alg=None,
                  **kwargs):
 
         self.global_best_cost = 2 ** 64
         self.global_best_position = np.array([0] * span_size)
         self.particles = []
         for _ in range(0, population_size):
-            self.particles.append(Particle(span_size, cost_function, inertia, c1, c2, min_val, max_val))
+            self.particles.append(Particle(span_size, cost_function, inertia, c1, c2, min_val, max_val, local_search_alg))
             if self.particles[-1].best_cost < self.global_best_cost:
                 self.global_best_cost = self.particles[-1].best_cost
                 self.global_best_position = self.particles[-1].best_position
