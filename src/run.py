@@ -4,7 +4,7 @@ from CrossDockingCentre import CrossDockingCentre
 from ParticleSwarmOptimizer import ParticleSwarmOptimizer
 from SimulatedAnnealingOptimizer import SimulatedAnnealingOptimizer
 import json, os
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import numpy as np
 
 
@@ -87,7 +87,7 @@ if __name__ == "__main__":
     cost_fcn_wrapper = CostFcnWrapper()
     best_sol_dumper = PsoBestCostsDumper()
     particles_dumper = PsoParticlesDumper()
-    local_opt = SimulatedAnnealingOptimizer(50)
+    local_opt = SimulatedAnnealingOptimizer(100)
     opt = ParticleSwarmOptimizer(106,
                                  cost_fcn_wrapper.cost_function,
                                  max_iter=100,
