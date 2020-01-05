@@ -84,19 +84,20 @@ def best_solution_saver(pso, last_iter):
 
 
 if __name__ == "__main__":
-    cost_fcn_wrapper = CostFcnWrapper()
-    best_sol_dumper = PsoBestCostsDumper()
-    particles_dumper = PsoParticlesDumper()
-    local_opt = SimulatedAnnealingOptimizer(100)
-    opt = ParticleSwarmOptimizer(106,
-                                 cost_fcn_wrapper.cost_function,
-                                 max_iter=100,
-                                 population_size=16,
-                                 local_search_alg=local_opt.optimize,
-                                 callbacks=[best_sol_dumper.dump,
-                                            particles_dumper.dump,
-                                            best_solution_saver])
-    opt.optimize()
+
+    # cost_fcn_wrapper = CostFcnWrapper()
+    # best_sol_dumper = PsoBestCostsDumper()
+    # particles_dumper = PsoParticlesDumper()
+    # local_opt = SimulatedAnnealingOptimizer(100)
+    # opt = ParticleSwarmOptimizer(106,
+    #                              cost_fcn_wrapper.cost_function,
+    #                              max_iter=1000,
+    #                              population_size=16,
+    #                              local_search_alg=local_opt.optimize,
+    #                              callbacks=[best_sol_dumper.dump,
+    #                                         particles_dumper.dump,
+    #                                         best_solution_saver])
+    # opt.optimize()
     # path = __file__.replace(__file__.split('/')[-1], '').replace(__file__.split('/')[-2] + '/', '') + 'results/'
     # # with open(path + 'best_particles.json', 'r') as infile:
     # #     best_part = json.load(infile)
@@ -105,3 +106,11 @@ if __name__ == "__main__":
     #     best_part = json.load(infile)
     # plt.plot(best_part['iterations'], best_part['costs'])
     # plt.show()
+
+    def f(x):
+        return x[0] ** 2 + x[1] ** 2
+
+    opt = SimulatedAnnealingOptimizer(max_iter = 10000, min_val = -1, max_val = 1)
+    sol, cost = opt.optimize(cost_function = f, initial_solution = [1, 1])
+    print("INITIAL SOLUTION: ", [1, 1])
+    print("SOLUTION: ", sol, "COST: ", cost)

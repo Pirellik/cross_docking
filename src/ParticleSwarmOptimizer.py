@@ -34,30 +34,24 @@ class ParticleSwarmOptimizer:
         self.c1 = c1
         self.c2 = c2
         self.max_iter = max_iter
-        self.callbacks = []
-        for key, value in kwargs.items():
-            if key == 'callbacks':
-                self.callbacks = value
+        if 'callbacks' in kwargs.keys():
+            self.callbacks = kwargs['callbacks']
 
     def optimize(self):
         print('INITIAL SOLUTION COST = ', self.global_best_cost)
         pool = Pool(multiprocessing.cpu_count())
-        pbar = tqdm(total=self.max_iter)
-        pbar.set_description(f'CURRENT BEST = {self.global_best_cost}')
-        for _ in range(0, self.max_iter):
+        for _ in tqdm(range(0, self.max_iter)):
             for particle in self.particles:
                 particle.load_global_best_pos(self.global_best_position)
             self.particles = pool.map(update_particle, self.particles)
             for particle in self.particles:
                 if particle.improved:
                     self.update_global_best(particle)
-                    pbar.set_description(f'CURRENT BEST = {self.global_best_cost}')
-            pbar.update()
             for callback in self.callbacks:
                 callback(self, False)
         for callback in self.callbacks:
             callback(self, last_iter=True)
-        return self.global_best_cost
+        return self.global_best_position, self.global_best_cost
 
     def update_global_best(self, particle):
         if particle.best_cost < self.global_best_cost:

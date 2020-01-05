@@ -7,7 +7,7 @@ import json
 class CrossDockingCentre:
     def __init__(self, problem_instance):
         self.temporary_storage = TemporaryStorage(problem_instance['K'])
-        self.time_step = min(problem_instance['G'], problem_instance['U'], problem_instance['F'], problem_instance['V'])
+        self.time_step = 1
         self.inbound_docks = [InboundDock(problem_instance['G'],
                                           problem_instance['U'],
                                           self.temporary_storage) for _ in range(0, problem_instance['R'])]
@@ -29,7 +29,6 @@ class CrossDockingCentre:
 
     def simulate(self, log_tmp_storage=False):
         time = 0
-        docks_finished = 0
 
         while sum([dock.is_operation_finished() for dock in self.inbound_docks]) < len(self.inbound_docks)\
                 or sum([dock.is_operation_finished() for dock in self.outbound_docks]) < len(self.outbound_docks):
@@ -37,14 +36,10 @@ class CrossDockingCentre:
                 self.tmp_storage_log["time"].append(time)
                 self.tmp_storage_log["num_items"].append(self.temporary_storage.products)
             for dock in self.inbound_docks:
-                if dock.is_operation_finished():
-                    docks_finished += 1
-                else:
+                if not dock.is_operation_finished():
                     dock.process_unloading_operation(time)
             for dock in self.outbound_docks:
-                if dock.is_operation_finished():
-                    docks_finished += 1
-                else:
+                if not dock.is_operation_finished():
                     dock.process_loading_operation(time)
 
             time += self.time_step

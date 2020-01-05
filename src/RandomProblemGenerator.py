@@ -81,3 +81,9 @@ class RandomProblemGenerator:
                 random_order.append((priority, random.random()))
             random_order = sorted(random_order, key=lambda x: x[1])
             problem_instance[truck_prio_var].append([x[0] for x in random_order])
+
+
+if __name__ == "__main__":
+    gen = RandomProblemGenerator(2, 2, 5, 5, 3, 1, 1, 1, 1, 5, 9)
+    gen.randomize()
+    print(gen.get_problem_instance())
